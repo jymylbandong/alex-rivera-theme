@@ -105,6 +105,8 @@ Header and footer:
 
 ## Structure
 - theme.json (version 3) for palette, typography, spacing, layout. Prefer theme.json over CSS.
+- One left edge: contentSize and wideSize are both 64rem, so header, every section and
+  footer line up. Long text (the bio) is limited with max-width in ch, left-aligned.
 - Fonts: system font stack only. No Google Fonts or other external font requests.
 - style.css only for what theme.json can't do: :focus-visible styles, small utilities.
 - inc/seo.php: meta description, canonical, JSON-LD, front page only, hooked to wp_head.

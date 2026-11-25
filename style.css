@@ -80,3 +80,12 @@ button:focus-visible {
 .course-meta dd {
 	margin: 0;
 }
+
+/*
+ * Bio: sections use the full 64rem width so every heading shares one left
+ * edge. A 68-character line keeps the long paragraph readable. It sits in a
+ * flow-layout group (see patterns/about.php), so it stays left-aligned.
+ */
+.bio {
+	max-width: 68ch;
+}
