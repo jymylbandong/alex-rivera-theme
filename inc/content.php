@@ -5,7 +5,8 @@
  * Client copy (final, word for word): name, title, bio, email, and each
  * course's name, description, length and url.
  * Developer keys: meta_description, image*, address, knows_about,
- * and each course's slug, workload and schedule.
+ * and each course's slug, mode, workload and schedule.
+ * Keep mode, workload and schedule in step with the visible length text.
  *
  * @package Alex_Rivera
  */
@@ -46,6 +47,7 @@ function alex_rivera_content() {
 				'name'        => 'Introduction to Acceptance and Commitment Therapy',
 				'description' => 'The core ideas and skills, for practitioners new to the approach.',
 				'length'      => '6 hours, online',
+				'mode'        => 'online',
 				'workload'    => 'PT6H',
 				'url'         => '#',
 			),
@@ -54,6 +56,7 @@ function alex_rivera_content() {
 				'name'        => 'Acceptance and Commitment Therapy for Anxiety',
 				'description' => 'How to apply the approach with clients experiencing anxiety.',
 				'length'      => '4 hours, online',
+				'mode'        => 'online',
 				'workload'    => 'PT4H',
 				'url'         => '#',
 			),
@@ -62,6 +65,7 @@ function alex_rivera_content() {
 				'name'        => 'Acceptance and Commitment Therapy Supervision',
 				'description' => 'Monthly group sessions to discuss cases and build confidence.',
 				'length'      => '1.5 hours a month, online',
+				'mode'        => 'online',
 				'schedule'    => array(
 					'repeatFrequency' => 'P1M',
 					'duration'        => 'PT1H30M',

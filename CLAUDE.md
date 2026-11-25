@@ -85,7 +85,8 @@ Header and footer:
 - inc/content.php is the single source of truth for person and course data.
   All patterns and inc/seo.php read from it.
 - Client copy keys (final, word for word): name, title, bio, email, courses
-  (slug, name, description, length, url). Technical keys: workload, schedule.
+  (name, description, length, url). Technical keys: slug, mode (JSON-LD courseMode),
+  workload, schedule.
 - Keys added by the developer, outside the client copy:
   - meta_description: "Sydney clinical psychologist Dr Alex Rivera trains psychologists,
     counsellors and social workers in Acceptance and Commitment Therapy, online."
