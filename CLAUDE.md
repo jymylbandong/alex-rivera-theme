@@ -45,10 +45,9 @@ are made by editing inc/content.php (see "Content and editing" below).
 - Keyboard: every interactive element is a real <a> or <button>, reachable with Tab
   in visual order. No positive tabindex. No keyboard traps.
 - Skip link: the first focusable element, visible on focus, jumps to #main.
-  Core's block-theme skip link is injected by JavaScript, so remove it
-  (remove_action wp_enqueue_scripts / wp_enqueue_block_template_skip_link) and
-  print <a class="skip-link" href="#main"> on wp_body_open instead.
-  .skip-link in style.css: visually hidden until focused, then visible.
+  Use core's: since WordPress 7.0 it is rendered on the server (no JavaScript),
+  inserted before .wp-site-blocks, and reuses <main id="main">. Don't unhook it or
+  print a second one. The theme requires WordPress 7.0 for this reason.
 - Focus: visible :focus-visible outline on links and buttons, at least 2px,
   3:1 contrast against the background. Never remove outlines without a replacement.
 - Contrast: body text at least 4.5:1, large text and UI borders at least 3:1.
@@ -104,7 +103,7 @@ Header and footer:
 ## Structure
 - theme.json (version 3) for palette, typography, spacing, layout. Prefer theme.json over CSS.
 - Fonts: system font stack only. No Google Fonts or other external font requests.
-- style.css only for what theme.json can't do: :focus-visible styles, .skip-link, small utilities.
+- style.css only for what theme.json can't do: :focus-visible styles, small utilities.
 - inc/seo.php: meta description, canonical, JSON-LD, front page only, hooked to wp_head.
   Core's rel_canonical is removed on the front page only, so there's exactly one canonical.
 - JSON-LD: one <script type="application/ld+json"> with an @graph:
