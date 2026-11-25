@@ -1,0 +1,85 @@
+# Project: Dr Alex Rivera, one-page WordPress block theme
+
+## Context
+One-page website for Dr Alex Rivera, a clinical psychologist and trainer in Sydney
+who runs online Acceptance and Commitment Therapy courses for practitioners.
+Priorities: accessibility, SEO and AEO, clean and maintainable code, mobile-friendly.
+The client must be able to update course details easily.
+
+## Hard rules
+- Custom block theme only. No plugins, no page builders, no external CSS frameworks.
+- All content must render on the server. No JavaScript is required to see or navigate content.
+- The client's copy is final. Use the name, title, bio, course names, descriptions,
+  lengths, and email exactly as provided, word for word. Don't rewrite, shorten,
+  or "improve" it. If anything conflicts with another rule, the provided copy wins.
+- en-AU applies to the site language (lang="en-AU") and to any text I write myself
+  (meta description, link text, alt text, labels), e.g. "counsellors", "colour".
+- One h1 (the name in the hero). Then h2 per section, h3 per course. No skipped levels.
+- Site Title block in the header renders as <p> (level 0), not a heading.
+- Navigation block: overlayMenu "never". Links are written in the block markup.
+- Course links have descriptive visible text, never repeated "Learn more".
+- Images have meaningful alt text plus width and height.
+- AEO: course length and format appear as visible text (a <dl>), not only in JSON-LD.
+  Names are identical in headings, links, meta, and JSON-LD.
+
+## Accessibility (target: WCAG 2.2 AA)
+- Landmarks: one <header>, <nav aria-label="Main">, one <main id="main">, one <footer>.
+  Each section is a <section> with a heading. No landmark without a purpose.
+- Keyboard: every interactive element is a real <a> or <button>, reachable with Tab
+  in visual order. No positive tabindex. No keyboard traps.
+- Skip link: the first focusable element, visible on focus, jumps to #main.
+- Focus: visible :focus-visible outline on links and buttons, at least 2px,
+  3:1 contrast against the background. Never remove outlines without a replacement.
+- Contrast: body text at least 4.5:1, large text and UI borders at least 3:1.
+  Check every palette pair in theme.json before using it.
+- Links: distinguishable without colour (underlined in body text). mailto link text
+  shows the email address.
+- Responsive: works from 320px wide with no horizontal scroll, readable at 200% zoom,
+  touch targets at least 24x24px, text sized in rem so browser font settings apply.
+- Motion: none needed. If any is added, respect prefers-reduced-motion.
+- Anchor targets: scroll-margin-top on sections if the header is ever sticky,
+  so headings aren't hidden under it.
+
+## Page sections (all four required, in this order)
+| Section  | Anchor   | Pattern                  | Content                                   |
+|----------|----------|--------------------------|-------------------------------------------|
+| Hero     | #top     | patterns/hero.php        | h1 name, title, photo                     |
+| About    | #about   | patterns/about.php       | h2 "About", bio                           |
+| Courses  | #courses | patterns/courses.php     | h2 "Courses", 3 x article (h3, description, <dl> length, link) |
+| Contact  | #contact | patterns/contact.php     | h2 "Contact", mailto:hello@example.com    |
+templates/front-page.html = header part + these four patterns inside <main id="main"> + footer part.
+
+## Structure
+- theme.json (version 3) for palette, typography, spacing, layout. Prefer theme.json over CSS.
+- style.css only for what theme.json can't do: :focus-visible styles, small utilities.
+- inc/content.php is the single source of truth for person and course data.
+  patterns/courses.php and inc/seo.php both read from it.
+- inc/seo.php: meta description, canonical, JSON-LD, front page only, hooked to wp_head.
+- JSON-LD: one <script type="application/ld+json"> with an @graph:
+  - Person (@id #person): name, honorificPrefix, jobTitle, description (the bio),
+    image, email, url, address (Sydney, AU), knowsAbout.
+  - 3 x Course (@id #course-<slug>): name, description, provider - #person,
+    hasCourseInstance: CourseInstance with courseMode "online" and
+    courseWorkload (PT6H, PT4H) or, for Supervision, courseSchedule
+    (repeatFrequency P1M, duration PT1H30M); instructor → #person.
+  - Every value comes from inc/content.php, so it always matches the visible text.
+  - Built as a PHP array and output with wp_json_encode(). Never hand-written JSON strings.
+- style.css is NOT loaded automatically in a block theme. Enqueue it once in
+  functions.php (wp_enqueue_scripts) with the theme version, so changes bust the cache.
+- Patterns live in /patterns with proper file headers. templates/front-page.html references them.
+
+## PHP
+- Escape all output: esc_html, esc_attr, esc_url, wp_json_encode.
+- Prefix functions with alex_rivera_. No closures in hooks, so they can be removed.
+- Build URLs with home_url() and get_theme_file_uri(). Never hardcode the domain.
+- Follow WordPress Coding Standards.
+
+## Block markup
+- Block comments and HTML must match exactly what the editor saves, or the block shows
+  "This block contains unexpected or invalid content." After generating markup,
+  I open it in the Site Editor to confirm there are no block validation errors.
+
+## Working rules
+- Small, focused changes. One concern per commit.
+- Explain any non-obvious code.
+- Don't add plugins, packages, or JavaScript without asking.
