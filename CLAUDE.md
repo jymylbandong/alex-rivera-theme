@@ -72,8 +72,10 @@ templates/index.html is also required (WordPress only treats a theme as a block 
 if it exists): header part + <main id="main"> with post content + footer part.
 
 Header and footer:
+- The template-part blocks use tagName "header" and "footer", so the parts themselves
+  are the <header> and <footer>. The patterns inside must not add a second one.
 - parts/header.html contains only the patterns/header.php pattern block. The pattern
-  outputs <header>: site name and the wp:html <nav> (see Hard rules).
+  outputs the site name and the wp:html <nav> (see Hard rules).
 - parts/footer.html contains only the patterns/footer.php pattern block. The pattern
   outputs one line: "© [current year] Dr Alex Rivera", year from PHP (wp_date( 'Y' )),
   name from inc/content.php.
