@@ -52,3 +52,15 @@ button:focus-visible {
 	margin: 0;
 	padding: 0;
 }
+
+/*
+ * Hero photo. width/height attributes reserve the 4:5 space before it loads;
+ * height: auto keeps that ratio as the width shrinks. 25rem = 400px, matching
+ * the sizes attribute.
+ */
+.hero-photo {
+	display: block;
+	height: auto;
+	max-width: 25rem;
+	width: 100%;
+}
