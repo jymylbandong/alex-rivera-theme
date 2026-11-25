@@ -24,6 +24,7 @@
 			"wideSize": "64rem"
 		},
 		"spacing": {
+			"blockGap": true,
 			"defaultSpacingSizes": false,
 			"units": [ "rem", "%" ],
 			"spacingSizes": [
