@@ -11,3 +11,12 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: alex-rivera
 */
+/*
+ * Focus: a 3px accent outline (7.62:1 on base, 6.82:1 on surface).
+ * :focus-visible shows it for keyboard users without a ring on every mouse click.
+ */
+a:focus-visible,
+button:focus-visible {
+	outline: 3px solid var(--wp--preset--color--accent);
+	outline-offset: 2px;
+}
