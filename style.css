@@ -64,3 +64,19 @@ button:focus-visible {
 	max-width: 25rem;
 	width: 100%;
 }
+
+/* Course length: "Length" and its value on one line, wrapping on narrow screens. */
+.course-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 0.5rem;
+	margin: 0;
+}
+
+.course-meta dt {
+	font-weight: 700;
+}
+
+.course-meta dd {
+	margin: 0;
+}
