@@ -20,3 +20,35 @@ button:focus-visible {
 	outline: 3px solid var(--wp--preset--color--accent);
 	outline-offset: 2px;
 }
+
+/*
+ * Header. The nav is plain HTML (a Custom HTML block), so theme.json can't
+ * style it. Links here aren't body text, so they're underlined on hover only.
+ * Padding keeps each link at least 24px tall (WCAG 2.5.8).
+ */
+.site-name {
+	font-weight: 700;
+	margin: 0;
+}
+
+.site-name a,
+.main-nav a {
+	color: var(--wp--preset--color--contrast);
+	display: inline-block;
+	padding-block: 0.25rem;
+	text-decoration: none;
+}
+
+.site-name a:hover,
+.main-nav a:hover {
+	text-decoration: underline;
+}
+
+.main-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 1.25rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
