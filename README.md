@@ -64,3 +64,33 @@ define( 'WP_DEVELOPMENT_MODE', 'theme' );
 | `templates/` | `front-page.html` (the page) and `index.html` (required fallback) |
 | `parts/` | Header and footer, each loading a pattern |
 | `patterns/` | Header, hero, about, courses, contact and footer |
+
+## What I checked and fixed
+
+All checks run on the live site, https://alex-rivera.jymyl.dev/
+
+- **PageSpeed Insights:** 100 in performance, accessibility, best practices
+  and SEO, on both mobile and desktop.
+- **WAVE:** 0 errors, 0 contrast errors. Two "possible heading" alerts on
+  the site name and job title; both are paragraphs on purpose, so the page
+  has a single h1.
+- **W3C validator:** no HTML errors. One CSS message about `container-type`
+  in WordPress core's block styles, which is valid CSS the validator
+  doesn't support yet.
+- **Schema Markup Validator and Google Rich Results Test:** 0 errors,
+  0 warnings. One Person and three Courses, linked by @id.
+- **Keyboard:** the skip link appears on the first Tab and moves focus past
+  the navigation; every link has a visible focus outline.
+- **JavaScript disabled:** all content, navigation and the skip link work.
+- **320px wide:** no horizontal scrolling; the navigation wraps and the
+  course cards stack.
+- **robots.txt and sitemap:** crawlers are allowed; the sitemap lists only
+  the homepage.
+
+### Fixed during review
+- **Editor styles:** the Site Editor didn't load style.css, so it didn't
+  match the front end. Added `add_editor_style()`.
+- **Alignment:** section headings didn't line up with the course cards.
+  Every section now uses the same layout width and left edge.
+- **Card spacing:** each course description sat directly against its
+  Length row. Added spacing between them.
